@@ -66,10 +66,6 @@ class Blog extends CI_Controller {
 		}
 	}
 
-	public function update($id){
-
-	}
-
 	public function remove($id = null){
 		$article = $this->{$this->model}->get_article_by_id($id);
 
