@@ -45,4 +45,21 @@ class Model_blog extends CI_Model {
         $this->db->insert($this->table);
         return $this->db->insert_id();
     }
+
+    public function update($data = array()){
+        if (isset($data['title'])){
+            $this->db->set('title', $data['title']);
+        }
+        if (isset($data['user_id'])){
+            $this->db->set('user_id', $data['user_id']);
+        }
+        if (isset($data['description'])){
+            $this->db->set('description', $data['description']);
+        }
+        if (isset($data['content'])){
+            $this->db->set('content', $data['content']);
+        }
+        $this->db->where('id', $data['id']);
+        return $this->db->update($this->table);
+    }
 }

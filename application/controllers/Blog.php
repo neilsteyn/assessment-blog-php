@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Blog extends CI_Controller {
 
 	private $model = 'Model_blog';
+	public $view = '';
 
 	public function __construct(){
 		parent::__construct();
@@ -44,15 +45,29 @@ class Blog extends CI_Controller {
 	}
 
 	public function edit($id = null){
+		$data = $this->input->post();
 		$article = $this->{$this->model}->get_article_by_id($id);
+		if (!empty($data)){
+			$article->title = $data['title'];
+			$article->description = $data['description'];
+			$article->content = $data['content'];
+
+			$this->{$this->model}->update((array)$article);
+			redirect(base_url('/user'));
+		}
 
 		if ($article){
+			$this->view = 'edit';
 			$this->load->view('header');
 			$this->load->view('blog_form', array(
 				'data' => $article
 			));
 			$this->load->view('footer');
 		}
+	}
+
+	public function update($id){
+
 	}
 
 	public function remove($id = null){

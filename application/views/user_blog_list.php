@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<dt>List of Articles</dt>';
 		
 		foreach ($articles as $i => $article){
-			echo "<dd>{$article->title} - <a href='blog/remove/{$article->id}'>remove</a></dd>";
+			echo "<dd><a href='blog/edit/{$article->id}'>{$article->title}</a> - <a href='blog/remove/{$article->id}'>remove</a></dd>";
 		}
 
 		echo '</dl>';
