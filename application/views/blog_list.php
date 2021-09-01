@@ -9,5 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<a href="user/register">Register</a>
 </section>
 <section>
-	ssss
+	<?php 
+		echo '<pre>';
+		print_r($articles);
+		echo '</pre>';
+	?>
 </section>

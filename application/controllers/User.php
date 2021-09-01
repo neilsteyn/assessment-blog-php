@@ -17,7 +17,9 @@ class User extends CI_Controller {
 
 		$articles = $this->{$this->model}->get_articles($session['id']);
 		$this->load->view('header');
-		$this->load->view('user_blog_list', $articles);
+		$this->load->view('user_blog_list', array(
+			'articles' => $articles
+		));
 		$this->load->view('footer');
 	}
 
@@ -39,8 +41,7 @@ class User extends CI_Controller {
 
 				$this->session->set_userdata(array(
 					'id' => $user[0]->id,
-					'email' => $user[0]->email,
-					//'token' => random_string('alnum', 32)
+					'email' => $user[0]->email
 				));
 
 				redirect(base_url('/user'));
@@ -65,8 +66,7 @@ class User extends CI_Controller {
 
 				$this->session->set_userdata(array(
 					'id' => $inserted_id,
-					'email' => $data->email,
-					//'token' => random_string('alnum', 32)
+					'email' => $data->email
 				));
 				redirect(base_url('/user'));
 			}
