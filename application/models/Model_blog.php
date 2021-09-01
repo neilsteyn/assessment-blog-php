@@ -17,7 +17,11 @@ class Model_blog extends CI_Model {
     public function get_article_by_id($id){
         $this->db->where('id', $id);
         $query = $this->db->get($this->table);
-        return $query->result()[0];
+        $results = $query->result();
+        if (!empty($results)){
+            return $query->result()[0];
+        }
+        return null;
     }
 
     public function delete($id){
@@ -28,6 +32,9 @@ class Model_blog extends CI_Model {
     public function create($data = array()){
         if (isset($data['title'])){
             $this->db->set('title', $data['title']);
+        }
+        if (isset($data['user_id'])){
+            $this->db->set('user_id', $data['user_id']);
         }
         if (isset($data['description'])){
             $this->db->set('description', $data['description']);

@@ -21,6 +21,7 @@ class Blog extends CI_Controller {
 	}
 
 	public function add(){
+		$session = $this->session->userdata();
 		$data = $this->input->post();
 
 		$this->form_validation->set_rules('title', 'Title', 'required');
@@ -28,6 +29,7 @@ class Blog extends CI_Controller {
 		$this->form_validation->set_rules('content', 'Content', 'required');
 
 		if ($this->form_validation->run() !== FALSE){
+			$data['user_id'] = $session['id'];
 			$inserted_id = $this->{$this->model}->create($data);
 			if ($inserted_id){
 				redirect(base_url('/user'));
@@ -59,5 +61,7 @@ class Blog extends CI_Controller {
 		if ($article){
 			$this->{$this->model}->delete($id);
 		}
+
+		redirect(base_url('/user'));
 	}
 }
